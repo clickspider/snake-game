@@ -28,12 +28,12 @@ const deafultGameSettings: DeafultGameSettings = {
       leftPosition: index,
       rightPosition: 0,
       topPosition: 0,
-      isRotate: false
+      isRotate: false,
     })
   ),
   score: 0,
   clickCounter: 0,
-  boardSize: "35x35"
+  boardSize: "35x35",
 };
 
 const Board = styled.div`
@@ -45,16 +45,18 @@ const Board = styled.div`
   height: 350px;
 `;
 
+interface SnakeBoxProps {
+  rightPosition: number;
+  topPosition: number;
+  leftPosition: number;
+  isRotate: boolean;
+}
+
 const SnakeBox = styled.div`
   background: green;
   width: 1px;
   height: 5px;
-
   position: absolute;
-  right: ${({ rightPosition }) => rightPosition}px;
-  top: ${({ topPosition }) => topPosition}px;
-  left: ${({ leftPosition }) => leftPosition}px;
-  transform: ${({ isRotate }) => isRotate && `rotate(91deg)`};
   transform-origin: center;
 `;
 
@@ -65,6 +67,7 @@ const SnakeContainer = styled.div`
 
 const rotateSnakeBox = (snakeArray: SnakeSize[], headSize: number) => {
   const snakeHeadIndex = snakeArray.length - headSize;
+  if (snakeHeadIndex === snakeArray.length) return snakeArray;
   const newSnakeSizeArray = snakeArray.map((item, index) => {
     const isIndexHead = index >= snakeHeadIndex;
     return {
@@ -73,7 +76,7 @@ const rotateSnakeBox = (snakeArray: SnakeSize[], headSize: number) => {
       leftPosition: isIndexHead
         ? snakeArray[snakeHeadIndex - 1].leftPosition
         : item.leftPosition,
-      isRotate: isIndexHead
+      isRotate: isIndexHead,
     };
   });
   return newSnakeSizeArray;
@@ -88,11 +91,11 @@ export default function App() {
           const { sankeSizeArray } = prevState;
           const newSnakeSizeArray = sankeSizeArray.map((item) => ({
             ...item,
-            leftPosition: item.leftPosition + SNAKE_JUMP
+            leftPosition: item.leftPosition + SNAKE_JUMP,
           }));
           return {
             ...prevState,
-            sankeSizeArray: newSnakeSizeArray
+            sankeSizeArray: newSnakeSizeArray,
           };
         });
       }
@@ -101,11 +104,11 @@ export default function App() {
           const { sankeSizeArray } = prevState;
           const newSnakeSizeArray = sankeSizeArray.map((item, index) => ({
             ...item,
-            leftPosition: item.leftPosition - SNAKE_JUMP
+            leftPosition: item.leftPosition - SNAKE_JUMP,
           }));
           return {
             ...prevState,
-            sankeSizeArray: newSnakeSizeArray
+            sankeSizeArray: newSnakeSizeArray,
           };
         });
       }
@@ -118,7 +121,7 @@ export default function App() {
           return {
             ...prevState,
             sankeSizeArray: newSnakeSizeArray,
-            clickCounter: prevState.clickCounter++
+            clickCounter: prevState.clickCounter++,
           };
         });
       }
@@ -137,14 +140,16 @@ export default function App() {
     <div className="App">
       <Board>
         <SnakeContainer>
-          {gameSettings.sankeSizeArray.map((snake, index) => {
+          {gameSettings.sankeSizeArray.map((snake) => {
             return (
               <SnakeBox
                 key={snake.id}
-                rightPosition={snake.rightPosition}
-                leftPosition={snake.leftPosition}
-                topPosition={snake.topPosition}
-                isRotate={snake.isRotate}
+                style={{
+                  left: snake.leftPosition,
+                  right: snake.rightPosition,
+                  top: snake.topPosition,
+                  transform: snake.isRotate && `rotate(91deg)`,
+                }}
               />
             );
           })}

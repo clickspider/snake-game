@@ -1,0 +1,59 @@
+Arguments: 
+  /usr/local/bin/node /opt/yarn-v1.22.19/bin/yarn.js install
+
+PATH: 
+  /project/home/pitcher-host/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.17.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/project/.cache/yarn/v6/npm-eslint-7.32.0-c6d328a14be3fb08c8d1d21e12c02fdb7a2a812d-integrity/node_modules/eslint/lib/cli-engine/cli-engine.js' -> '/project/snake-game/node_modules/eslint/lib/cli-engine/cli-engine.js'
+
+npm manifest: 
+  {
+    "name": "react-typescript",
+    "version": "1.0.0",
+    "description": "React and TypeScript example starter project",
+    "keywords": [
+      "typescript",
+      "react",
+      "starter"
+    ],
+    "main": "src/index.tsx",
+    "dependencies": {
+      "react": "18.0.0",
+      "react-dom": "18.0.0",
+      "react-scripts": "4.0.3",
+      "styled-components": "5.3.6"
+    },
+    "devDependencies": {
+      "@types/react": "17.0.20",
+      "@types/react-dom": "17.0.9",
+      "typescript": "4.4.2"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test --env=jsdom",
+      "eject": "react-scripts eject"
+    },
+    "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
